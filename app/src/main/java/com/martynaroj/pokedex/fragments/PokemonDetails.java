@@ -199,9 +199,11 @@ public class PokemonDetails extends Fragment {
     @SuppressLint("SetTextI18n")
     private void setViewComponents() {
         if (!isCreated) {
+            final String basicImageUrl = "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/";
+
             pokemonName.setText(pokemon.getName());
             Glide.with(Objects.requireNonNull(getContext()))
-                    .load("https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/" + pokemonUrl.getNumber() + ".png")
+                    .load(basicImageUrl + pokemonUrl.getNumber() + ".png")
                     .fitCenter()
                     .error(R.drawable.emptyimage)
                     .into(pokemonImageView);
@@ -246,8 +248,6 @@ public class PokemonDetails extends Fragment {
                 textView.setLayoutParams(params);
                 layout_pokemon_abilities.addView(textView);
             }
-
-            final String basicImageUrl = "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/";
 
             if(pokemonEvolution1!=null) {
                 Glide.with(Objects.requireNonNull(getContext()))

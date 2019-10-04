@@ -2,8 +2,11 @@ package com.martynaroj.pokedex.fragments;
 
 
 import android.annotation.SuppressLint;
+import android.app.Activity;
+import android.content.Context;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.constraint.ConstraintLayout;
 import android.support.v4.app.Fragment;
@@ -11,6 +14,7 @@ import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -105,7 +109,15 @@ public class PokemonDetails extends Fragment {
         return rootView;
     }
 
-//========================================
+//=========================================
+
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        hideKeyboardFrom(getActivity(), view);
+    }
+
+    //========================================
 
     private void fetchData() {
         Rest.getRest().getPokemon(pokemonUrl.getNumber()).enqueue(new Callback<Pokemon>() {
@@ -356,6 +368,12 @@ public class PokemonDetails extends Fragment {
         imageView.setImageResource(getResources().getIdentifier("type" + number.toString(),
                 "drawable", Objects.requireNonNull(getContext()).getPackageName()));
         return imageView;
+    }
+//========================================
+
+    public static void hideKeyboardFrom(Context context, View view) {
+        InputMethodManager imm = (InputMethodManager) context.getSystemService(Activity.INPUT_METHOD_SERVICE);
+        imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
     }
 
 //========================================

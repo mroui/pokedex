@@ -1,0 +1,482 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <android.support.constraint.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        tools:context=".fragments.PokemonDetails"
+        android:background="@drawable/background"
+        android:clickable="true"
+        android:focusable="true"
+        android:paddingBottom="@dimen/standard_margin">
+
+        <com.wang.avi.AVLoadingIndicatorView
+            android:id="@+id/avLoadingIndicatorView"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            app:indicatorColor="@color/colorPrimary"
+            app:indicatorName="BallPulseSyncIndicator"
+            android:elevation="4dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"/>
+
+        <android.support.constraint.ConstraintLayout
+            android:id="@+id/rootLayout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:id="@+id/pokemon_details_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/small_margin"
+                android:layout_marginTop="@dimen/small_margin"
+                android:layout_marginEnd="@dimen/small_margin"
+                android:layout_marginBottom="@dimen/small_margin"
+                android:fontFamily="sans-serif-condensed"
+                android:gravity="center_horizontal"
+                android:textAlignment="center"
+                android:textColor="@color/colorWhite"
+                android:textSize="@dimen/big_text"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toTopOf="@+id/pokemon_details_image"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="1.0" />
+
+
+            <ImageView
+                android:id="@+id/pokemon_details_image"
+                android:layout_width="match_parent"
+                android:layout_height="150dp"
+                android:layout_marginStart="@dimen/standard_margin"
+                android:layout_marginTop="104dp"
+                android:layout_marginEnd="@dimen/standard_margin"
+                android:elevation="3dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <android.support.v7.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="200dp"
+                android:layout_marginEnd="8dp"
+                android:background="@color/colorWhite"
+                app:cardCornerRadius="20dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <RelativeLayout
+                    android:layout_height="match_parent"
+                    android:layout_width="match_parent"
+                    android:layout_marginTop="@dimen/large_margin"
+                    android:layout_marginBottom="@dimen/standard_margin">
+
+                    <TableLayout
+                        android:id="@+id/table_layout_pokemonstats"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:elevation="3dp"
+                        android:shrinkColumns="*"
+                        android:stretchColumns="*"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintHorizontal_bias="0.0"
+                        app:layout_constraintStart_toStartOf="parent">
+
+                        <!--height, weight, exp values-->
+                        <TableRow>
+                            <TextView
+                                android:id="@+id/pokemon_height"
+                                android:layout_gravity="center_horizontal"
+                                android:fontFamily="sans-serif-condensed"
+                                android:textColor="@color/colorBlack"
+                                android:textSize="@dimen/standard_text"
+                                android:textStyle="bold" />
+                            <TextView
+                                android:id="@+id/pokemon_base_exp"
+                                android:layout_gravity="center_horizontal"
+                                android:fontFamily="sans-serif-condensed"
+                                android:textColor="@color/colorBlack"
+                                android:textSize="@dimen/standard_text"
+                                android:textStyle="bold" />
+                            <TextView
+                                android:id="@+id/pokemon_weight"
+                                android:layout_gravity="center_horizontal"
+                                android:fontFamily="sans-serif-condensed"
+                                android:textColor="@color/colorBlack"
+                                android:textSize="@dimen/standard_text"
+                                android:textStyle="bold" />
+                        </TableRow>
+                        <!--height, weight, exp description-->
+                        <TableRow>
+                            <TextView
+                                android:layout_gravity="center_horizontal"
+                                android:fontFamily="sans-serif-condensed"
+                                android:text="@string/height"
+                                android:textSize="@dimen/small_text"
+                                android:textStyle="bold" />
+                            <TextView
+                                android:layout_gravity="center_horizontal"
+                                android:fontFamily="sans-serif-condensed"
+                                android:text="@string/exp"
+                                android:textSize="@dimen/small_text"
+                                android:textStyle="bold" />
+                            <TextView
+                                android:layout_gravity="center_horizontal"
+                                android:fontFamily="sans-serif-condensed"
+                                android:text="@string/weight"
+                                android:textSize="@dimen/small_text"
+                                android:textStyle="bold" />
+                        </TableRow>
+                        <!--defense, hp, attack values-->
+                        <TableRow android:layout_marginTop="@dimen/standard_margin">
+                            <TextView
+                                android:id="@+id/pokemon_defense"
+                                android:layout_gravity="center_horizontal"
+                                android:fontFamily="sans-serif-condensed"
+                                android:textColor="@color/colorBlack"
+                                android:textSize="@dimen/standard_text"
+                                android:textStyle="bold" />
+                            <TextView
+                                android:id="@+id/pokemon_hp"
+                                android:layout_gravity="center_horizontal"
+                                android:fontFamily="sans-serif-condensed"
+                                android:textColor="@color/colorBlack"
+                                android:textSize="@dimen/standard_text"
+                                android:textStyle="bold" />
+                            <TextView
+                                android:id="@+id/pokemon_attack"
+                                android:layout_gravity="center_horizontal"
+                                android:fontFamily="sans-serif-condensed"
+                                android:textColor="@color/colorBlack"
+                                android:textSize="@dimen/standard_text"
+                                android:textStyle="bold" />
+                        </TableRow>
+                        <!--defence, hp, attack description-->
+                        <TableRow>
+                            <TextView
+                                android:layout_gravity="center_horizontal"
+                                android:fontFamily="sans-serif-condensed"
+                                android:text="@string/defense"
+                                android:textSize="@dimen/small_text"
+                                android:textStyle="bold" />
+                            <TextView
+                                android:layout_gravity="center_horizontal"
+                                android:fontFamily="sans-serif-condensed"
+                                android:text="@string/hp"
+                                android:textSize="@dimen/small_text"
+                                android:textStyle="bold" />
+                            <TextView
+                                android:layout_gravity="center_horizontal"
+                                android:fontFamily="sans-serif-condensed"
+                                android:text="@string/attack"
+                                android:textSize="@dimen/small_text"
+                                android:textStyle="bold" />
+                        </TableRow>
+                        <!--special defense, speed, special attack values-->
+                        <TableRow android:layout_marginTop="@dimen/standard_margin">
+                            <TextView
+                                android:id="@+id/pokemon_special_defense"
+                                android:layout_gravity="center_horizontal"
+                                android:fontFamily="sans-serif-condensed"
+                                android:textColor="@color/colorBlack"
+                                android:textSize="@dimen/standard_text"
+                                android:textStyle="bold" />
+                            <TextView
+                                android:id="@+id/pokemon_speed"
+                                android:layout_gravity="center_horizontal"
+                                android:fontFamily="sans-serif-condensed"
+                                android:textColor="@color/colorBlack"
+                                android:textSize="@dimen/standard_text"
+                                android:textStyle="bold" />
+                            <TextView
+                                android:id="@+id/pokemon_special_attack"
+                                android:layout_gravity="center_horizontal"
+                                android:fontFamily="sans-serif-condensed"
+                                android:textColor="@color/colorBlack"
+                                android:textSize="@dimen/standard_text"
+                                android:textStyle="bold" />
+                        </TableRow>
+                        <!--special defense, speed, special attack description-->
+                        <TableRow>
+                            <TextView
+                                android:layout_gravity="center_horizontal"
+                                android:fontFamily="sans-serif-condensed"
+                                android:text="@string/special_defense"
+                                android:textSize="@dimen/small_text"
+                                android:textStyle="bold" />
+                            <TextView
+                                android:layout_gravity="center_horizontal"
+                                android:fontFamily="sans-serif-condensed"
+                                android:text="@string/speed"
+                                android:textSize="@dimen/small_text"
+                                android:textStyle="bold" />
+                            <TextView
+                                android:layout_gravity="center_horizontal"
+                                android:fontFamily="sans-serif-condensed"
+                                android:text="@string/special_attack"
+                                android:textSize="@dimen/small_text"
+                                android:textStyle="bold" />
+                        </TableRow>
+                    </TableLayout>
+
+                    <LinearLayout
+                        android:id="@+id/pokemon_types_list_image"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerHorizontal="true"
+                        android:orientation="horizontal"
+                        android:layout_marginTop="@dimen/standard_margin"
+                        android:layout_below="@+id/table_layout_pokemonstats">
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/pokemon_types_list_desc"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerHorizontal="true"
+                        android:orientation="horizontal"
+                        android:layout_marginBottom="@dimen/standard_margin"
+                        android:layout_below="@+id/pokemon_types_list_image">
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/layout_pokemon_doubledamage_to"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:layout_marginStart="@dimen/standard_margin"
+                        android:layout_marginBottom="@dimen/standard_margin"
+                        android:layout_below="@+id/pokemon_types_list_desc">
+                        <TextView
+                            android:layout_height="wrap_content"
+                            android:layout_width="90dp"
+                            android:paddingEnd="@dimen/standard_margin"
+                            android:layout_gravity="center"
+                            android:fontFamily="sans-serif-condensed"
+                            android:textColor="@color/colorBlack"
+                            android:textSize="@dimen/small_text"
+                            android:textStyle="bold"
+                            android:text="@string/double_damage_to"/>
+                        <TextView
+                            android:id="@+id/none_doubledamage_to"
+                            android:layout_height="wrap_content"
+                            android:layout_width="wrap_content"
+                            android:layout_gravity="center"
+                            android:fontFamily="sans-serif-condensed"
+                            android:textSize="@dimen/small_text"
+                            android:textStyle="bold"
+                            android:text="@string/none"/>
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/layout_pokemon_doubledamage_from"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:layout_marginStart="@dimen/standard_margin"
+                        android:layout_marginBottom="@dimen/standard_margin"
+                        android:layout_below="@+id/layout_pokemon_doubledamage_to">
+                        <TextView
+                            android:layout_height="wrap_content"
+                            android:layout_width="90dp"
+                            android:paddingEnd="@dimen/standard_margin"
+                            android:layout_gravity="center"
+                            android:fontFamily="sans-serif-condensed"
+                            android:textColor="@color/colorBlack"
+                            android:textSize="@dimen/small_text"
+                            android:textStyle="bold"
+                            android:text="@string/double_damage_from"/>
+                        <TextView
+                            android:id="@+id/none_doubledamage_from"
+                            android:layout_height="wrap_content"
+                            android:layout_width="wrap_content"
+                            android:layout_gravity="center"
+                            android:fontFamily="sans-serif-condensed"
+                            android:textSize="@dimen/small_text"
+                            android:textStyle="bold"
+                            android:text="@string/none"/>
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/layout_pokemon_nodamage_to"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:layout_marginStart="@dimen/standard_margin"
+                        android:layout_marginBottom="@dimen/standard_margin"
+                        android:layout_below="@+id/layout_pokemon_doubledamage_from">
+                        <TextView
+                            android:layout_height="wrap_content"
+                            android:layout_width="90dp"
+                            android:paddingEnd="@dimen/standard_margin"
+                            android:layout_gravity="center"
+                            android:fontFamily="sans-serif-condensed"
+                            android:textColor="@color/colorBlack"
+                            android:textSize="@dimen/small_text"
+                            android:textStyle="bold"
+                            android:text="@string/no_damage_to"/>
+                        <TextView
+                            android:id="@+id/none_nodamage_to"
+                            android:layout_height="wrap_content"
+                            android:layout_width="wrap_content"
+                            android:layout_gravity="center"
+                            android:fontFamily="sans-serif-condensed"
+                            android:textSize="@dimen/small_text"
+                            android:textStyle="bold"
+                            android:text="@string/none"/>
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/layout_pokemon_nodamage_from"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:layout_marginStart="@dimen/standard_margin"
+                        android:layout_marginBottom="@dimen/standard_margin"
+                        android:layout_below="@+id/layout_pokemon_nodamage_to">
+                        <TextView
+                            android:layout_height="wrap_content"
+                            android:layout_width="90dp"
+                            android:paddingEnd="@dimen/standard_margin"
+                            android:layout_gravity="center"
+                            android:fontFamily="sans-serif-condensed"
+                            android:textColor="@color/colorBlack"
+                            android:textSize="@dimen/small_text"
+                            android:textStyle="bold"
+                            android:text="@string/no_damage_from"/>
+                        <TextView
+                            android:id="@+id/none_nodamage_from"
+                            android:layout_height="wrap_content"
+                            android:layout_width="wrap_content"
+                            android:layout_gravity="center"
+                            android:fontFamily="sans-serif-condensed"
+                            android:textSize="@dimen/small_text"
+                            android:textStyle="bold"
+                            android:text="@string/none"/>
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/abilities_desc"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentStart="true"
+                        android:layout_alignParentEnd="true"
+                        android:orientation="horizontal"
+                        android:layout_gravity="center"
+                        android:layout_marginStart="@dimen/standard_margin"
+                        android:layout_marginBottom="@dimen/standard_margin"
+                        android:layout_below="@+id/layout_pokemon_nodamage_from">
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_horizontal"
+                            android:fontFamily="sans-serif-condensed"
+                            android:text="@string/abilities"
+                            android:layout_weight="1"
+                            android:textAlignment="center"
+                            android:textSize="@dimen/small_text"
+                            android:textStyle="bold" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/pokemon_abilities"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentStart="true"
+                        android:layout_alignParentEnd="true"
+                        android:orientation="horizontal"
+                        android:gravity="center"
+                        android:layout_marginStart="@dimen/standard_margin"
+                        android:layout_marginBottom="@dimen/standard_margin"
+                        android:layout_below="@+id/abilities_desc">
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/pokemon_evolutions_images"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/pokemon_abilities"
+                        android:layout_alignParentStart="true"
+                        android:layout_alignParentEnd="true"
+                        android:layout_gravity="center"
+                        android:gravity="center_horizontal"
+                        android:orientation="horizontal">
+
+                        <ImageView
+                            android:id="@+id/pokemon_evolution_1"
+                            android:layout_width="100dp"
+                            android:layout_height="100dp"/>
+
+                        <ImageView
+                            android:id="@+id/pokemon_evolution_2"
+                            android:layout_width="100dp"
+                            android:layout_height="100dp" />
+
+                        <ImageView
+                            android:id="@+id/pokemon_evolution_3"
+                            android:layout_width="100dp"
+                            android:layout_height="100dp" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentStart="true"
+                        android:layout_alignParentEnd="true"
+                        android:layout_gravity="center"
+                        android:gravity="center_horizontal"
+                        android:layout_marginBottom="@dimen/standard_margin"
+                        android:orientation="horizontal"
+                        android:layout_below="@+id/pokemon_evolutions_images">
+                        <TextView
+                            android:id="@+id/pokemon_evolution_1_desc"
+                            android:layout_width="100dp"
+                            android:layout_height="wrap_content"
+                            android:textAlignment="center"
+                            android:fontFamily="sans-serif-condensed"
+                            android:textSize="@dimen/small_text"
+                            android:textStyle="bold"/>
+                        <TextView
+                            android:id="@+id/pokemon_evolution_2_desc"
+                            android:layout_width="100dp"
+                            android:layout_height="wrap_content"
+                            android:textAlignment="center"
+                            android:fontFamily="sans-serif-condensed"
+                            android:textSize="@dimen/small_text"
+                            android:textStyle="bold"/>
+                        <TextView
+                            android:id="@+id/pokemon_evolution_3_desc"
+                            android:layout_width="100dp"
+                            android:layout_height="wrap_content"
+                            android:textAlignment="center"
+                            android:fontFamily="sans-serif-condensed"
+                            android:textSize="@dimen/small_text"
+                            android:textStyle="bold"/>
+                    </LinearLayout>
+
+                </RelativeLayout>
+
+            </android.support.v7.widget.CardView>
+
+        </android.support.constraint.ConstraintLayout>
+
+    </android.support.constraint.ConstraintLayout>
+
+</ScrollView>

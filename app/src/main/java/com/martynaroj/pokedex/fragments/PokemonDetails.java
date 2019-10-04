@@ -360,12 +360,6 @@ public class PokemonDetails extends Fragment {
 
 //========================================
 
-    private boolean isSet(boolean[] isTypeSetDoubleDamageTo, Integer number) {
-        return isTypeSetDoubleDamageTo[number];
-    }
-
-//========================================
-
     private void findViews(View rootView) {
         rootLayout = rootView.findViewById(R.id.rootLayout);
         avLoadingIndicatorView = rootView.findViewById(R.id.avLoadingIndicatorView);

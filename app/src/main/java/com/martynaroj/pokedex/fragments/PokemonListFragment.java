@@ -1,6 +1,11 @@
 package com.martynaroj.pokedex.fragments;
 
 
+import android.app.AlertDialog;
+import android.content.Context;
+import android.content.DialogInterface;
+import android.content.Intent;
+import android.net.ConnectivityManager;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -106,20 +111,33 @@ public class PokemonListFragment extends BaseFragment implements OnItemListener 
 
 //========================================
 
+    private boolean isNetworkConnected(Context context) {
+        ConnectivityManager cm = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
+        return cm.getActiveNetworkInfo() != null && cm.getActiveNetworkInfo().isConnected();
+    }
+
+//========================================
+
     private void fetchData(final String s) {
-        pokemonsList.clear();
-        Rest.getRest().getListPokemons(String.valueOf(offset), String.valueOf(limit)).enqueue(new Callback<PokemonResponse>() {
-            @Override
-            public void onResponse(Call<PokemonResponse> call, Response<PokemonResponse> response) {
-                if (response.isSuccessful() && response.body() != null) {
-                    pokemonsList.addAll(response.body().getResults());
-                    adapter.addList(pokemonsList);
-                    adapter.getFilter().filter(s);
+        if (isNetworkConnected(getContext())) {
+            pokemonsList.clear();
+            Rest.getRest().getListPokemons(String.valueOf(offset), String.valueOf(limit)).enqueue(new Callback<PokemonResponse>() {
+                @Override
+                public void onResponse(Call<PokemonResponse> call, Response<PokemonResponse> response) {
+                    if (response.isSuccessful() && response.body() != null) {
+                        pokemonsList.addAll(response.body().getResults());
+                        adapter.addList(pokemonsList);
+                        adapter.getFilter().filter(s);
+                    }
                 }
-            }
-            @Override
-            public void onFailure(Call<PokemonResponse> call, Throwable t) { }
-        });
+
+                @Override
+                public void onFailure(Call<PokemonResponse> call, Throwable t) {
+                }
+            });
+        } else {
+            //show alert
+        }
     }
 
 //========================================

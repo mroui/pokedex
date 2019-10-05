@@ -136,7 +136,7 @@ public class PokemonListFragment extends BaseFragment implements OnItemListener 
                 }
             });
         } else {
-            //show alert
+            showNetworkAlert();
         }
     }
 
@@ -148,6 +148,32 @@ public class PokemonListFragment extends BaseFragment implements OnItemListener 
     }
 
 //========================================
+
+    private void showNetworkAlert() {
+        AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(getContext(), AlertDialog.THEME_DEVICE_DEFAULT_LIGHT);
+        alertDialogBuilder
+                .setMessage("No internet connection on your device.")
+                .setTitle("No Internet Connection")
+                .setCancelable(false)
+                .setPositiveButton("Refresh",
+                        new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int id) {}
+                        });
+        final AlertDialog alert = alertDialogBuilder.create();
+        alert.show();
+        alert.getButton(AlertDialog.BUTTON_POSITIVE).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                alert.dismiss();
+                if (!isNetworkConnected(getContext()))
+                    alert.show();
+                else
+                    fetchData(null);
+            }
+        });
+    }
+
+//=====================================
 
     private void setAdapter() {
         adapter = new PokemonListAdapter(getContext(), this);

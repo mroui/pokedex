@@ -112,13 +112,6 @@ public class PokemonListFragment extends BaseFragment implements OnItemListener,
 
 //========================================
 
-    private boolean isNetworkConnected(Context context) {
-        ConnectivityManager cm = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
-        return cm.getActiveNetworkInfo() != null && cm.getActiveNetworkInfo().isConnected();
-    }
-
-//========================================
-
     private void fetchData(final String s) {
         if (isNetworkConnected(getContext())) {
             pokemonsList.clear();
@@ -157,20 +150,15 @@ public class PokemonListFragment extends BaseFragment implements OnItemListener,
                 .setTitle("No Internet Connection")
                 .setCancelable(false)
                 .setPositiveButton("Refresh",
-                        new DialogInterface.OnClickListener() {
-                            public void onClick(DialogInterface dialog, int id) {}
-                        });
+                        (dialog, id) -> {});
         final AlertDialog alert = alertDialogBuilder.create();
         alert.show();
-        alert.getButton(AlertDialog.BUTTON_POSITIVE).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                alert.dismiss();
-                if (!isNetworkConnected(getContext()))
-                    alert.show();
-                else
-                    fetchData(null);
-            }
+        alert.getButton(AlertDialog.BUTTON_POSITIVE).setOnClickListener(v -> {
+            alert.dismiss();
+            if (!isNetworkConnected(getContext()))
+                alert.show();
+            else
+                fetchData(null);
         });
     }
 

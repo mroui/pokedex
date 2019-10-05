@@ -3,7 +3,9 @@ package com.martynaroj.pokedex.fragments;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -21,6 +23,7 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.martynaroj.pokedex.R;
+import com.martynaroj.pokedex.interfaces.NetworkListener;
 import com.martynaroj.pokedex.models.ChainLink;
 import com.martynaroj.pokedex.models.Pokemon;
 import com.martynaroj.pokedex.models.PokemonTypeDetails;
@@ -39,7 +42,7 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 
-public class PokemonDetails extends Fragment {
+public class PokemonDetails extends Fragment implements NetworkListener {
 
     private TextView pokemonName;
     private ImageView pokemonImageView;
@@ -120,17 +123,22 @@ public class PokemonDetails extends Fragment {
     //========================================
 
     private void fetchData() {
-        Rest.getRest().getPokemon(pokemonUrl.getNumber()).enqueue(new Callback<Pokemon>() {
-            @Override
-            public void onResponse(Call<Pokemon> call, Response<Pokemon> response) {
-                if (response.isSuccessful() && response.body() != null) {
-                    pokemon = response.body();
-                    fetchDataTypes();
+        if(isNetworkConnected(getContext())) {
+            Rest.getRest().getPokemon(pokemonUrl.getNumber()).enqueue(new Callback<Pokemon>() {
+                @Override
+                public void onResponse(Call<Pokemon> call, Response<Pokemon> response) {
+                    if (response.isSuccessful() && response.body() != null) {
+                        pokemon = response.body();
+                        fetchDataTypes();
+                    }
                 }
-            }
-            @Override
-            public void onFailure(Call<Pokemon> call, Throwable t) { }
-        });
+                @Override
+                public void onFailure(Call<Pokemon> call, Throwable t) {
+                }
+            });
+        } else {
+            showNetworkAlert();
+        }
     }
 
 //========================================
@@ -409,5 +417,26 @@ public class PokemonDetails extends Fragment {
         nameEvolution1 = rootView.findViewById(R.id.pokemon_evolution_1_desc);
         nameEvolution2 = rootView.findViewById(R.id.pokemon_evolution_2_desc);
         nameEvolution3 = rootView.findViewById(R.id.pokemon_evolution_3_desc);
+    }
+
+//========================================
+    @Override
+    public void showNetworkAlert() {
+        AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(getContext(), AlertDialog.THEME_DEVICE_DEFAULT_LIGHT);
+        alertDialogBuilder
+                .setMessage("No internet connection on your device.")
+                .setTitle("No Internet Connection")
+                .setCancelable(false)
+                .setPositiveButton("Refresh",
+                        (dialog, id) -> {});
+        final AlertDialog alert = alertDialogBuilder.create();
+        alert.show();
+        alert.getButton(AlertDialog.BUTTON_POSITIVE).setOnClickListener(v -> {
+            alert.dismiss();
+            if (!isNetworkConnected(getContext()))
+                alert.show();
+            else
+                fetchData();
+        });
     }
 }

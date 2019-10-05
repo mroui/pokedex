@@ -18,6 +18,7 @@ import android.view.ViewGroup;
 import com.martynaroj.pokedex.R;
 import com.martynaroj.pokedex.base.BaseFragment;
 import com.martynaroj.pokedex.fragments.adapters.PokemonListAdapter;
+import com.martynaroj.pokedex.interfaces.NetworkListener;
 import com.martynaroj.pokedex.interfaces.OnItemListener;
 import com.martynaroj.pokedex.models.PokemonResponse;
 import com.martynaroj.pokedex.models.PokemonUrl;
@@ -29,7 +30,7 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 
-public class PokemonListFragment extends BaseFragment implements OnItemListener {
+public class PokemonListFragment extends BaseFragment implements OnItemListener, NetworkListener {
 
     private RecyclerView recyclerView;
     private List<PokemonUrl> pokemonsList;
@@ -149,7 +150,7 @@ public class PokemonListFragment extends BaseFragment implements OnItemListener 
 
 //========================================
 
-    private void showNetworkAlert() {
+    public void showNetworkAlert() {
         AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(getContext(), AlertDialog.THEME_DEVICE_DEFAULT_LIGHT);
         alertDialogBuilder
                 .setMessage("No internet connection on your device.")

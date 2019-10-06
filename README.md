@@ -55,6 +55,7 @@ Pokedex is made for **smartphone** with **Android 5.0+** system but **targeted v
 
 ## Screenshots
 <p align="center">
+	<img src="./app/src/main/res/drawable/screenshots/pokedex-screenshot.png" alt="Pokedex app screenshots"/>
 </p>
 
 ## Setup

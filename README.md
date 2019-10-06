@@ -1,5 +1,7 @@
 <p align="center">
-  <img src="./app/src/main/res/drawable/icon_smaller.png" alt="Pokedex logo icon" width="100"/>
+  <img src="./app/src/main/res/drawable/icon_smaller.png" alt="Pokedex logo icon" width="30"/>
+  <img src="./app/src/main/res/drawable/icon_smaller.png" alt="Pokedex logo icon" width="30"/>
+  <img src="./app/src/main/res/drawable/icon_smaller.png" alt="Pokedex logo icon" width="30"/>
 </p>
 <p align="center">
   <img src="./app/src/main/res/drawable/app_name.png" alt="Pokedex logo name"/>
@@ -31,7 +33,7 @@ For the proper operation of an application, **internet connection is required**.
 Pokedex is made for **smartphone** with **Android 5.0+** system but **targeted version** is **Android 9.0** on which application **was tested**.
 </br></br>
 
-*An application uses the RESTful Pokemon API -> [PokéAPI](https://pokeapi.co/) .
+*An application uses the RESTful Pokemon API -> [PokéAPI](https://pokeapi.co/) .*
 
 *Project was made for my own use and convenience with Pokemon GO game.*
 

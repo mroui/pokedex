@@ -22,7 +22,7 @@
 </br></br>
 It allows to obtain a **knowledge** about huge **list of pokemons**, their *statistics*, *evolutions* and more!
 </br></br>
-Nowadays, **one of the most popular mobile games is Pokemon GO** for which Pokedex is **very usefull** and makes gameplay **more convenience**.
+Nowadays, **one of the most popular mobile games is Pokemon GO** for which Pokedex is **very useful** and makes gameplay **more convenience**.
 </br></br>
 You can **search for your favourite Pokemon**, get to know about its *average height*, *attack power* or for which pokemon types *deals double damage*.
 </br></br>
@@ -37,3 +37,11 @@ Pokedex is made for **smartphone** with **Android 5.0+** system but **targeted v
 
 *Project was made for my own use and convenience with Pokemon GO game.*
 
+## Features
+* Access to huge list of Pokemons
+* Search engine by pokemon name
+* Informations about appearance, statistics, abilities, evolutions and types
+* Specified attack powers to various types
+* Quick access to searched informations
+* Useful with pokemon games
+* Makes Pokemon GO fights easier :fire: :zap: :snowflake:

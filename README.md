@@ -45,3 +45,26 @@ Pokedex is made for **smartphone** with **Android 5.0+** system but **targeted v
 * Quick access to searched informations
 * Useful with pokemon games
 * Makes Pokemon GO fights easier :fire: :zap: :snowflake:
+
+## Technologies
+* Android Studio 3.4.1 or newer
+* Android Emulator or Android device (highly recommended)
+* Android 5.0, but more targeted 9.0
+* RESTful API [PokéAPI](https://pokeapi.co/)
+* Internet connection required
+
+## Screenshots
+<p align="center">
+</p>
+
+## Setup
+* [Install Android Studio](https://developer.android.com/studio)
+* Clone repository
+```
+git clone https://github.com/mroui/pokedex.git
+```
+* Import project by Android Studio
+* Run with emulator or android device connected via usb 
+
+## License
+This project is licensed under the terms of the MIT license.
